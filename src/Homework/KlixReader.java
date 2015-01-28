@@ -51,25 +51,9 @@ public class KlixReader {
 				items.add(currentElement);			//Adding element into linked list						
 
 				if (current.hasChildNodes()) { 		//Now checking if current has child nodes ( not necessary)
-					NodeList titleList = ((Element) current).getElementsByTagName("title");		//Node list of titles
-					NodeList contentList = ((Element) current).getElementsByTagName("clanak");	//Node list of content
-					for (int j = 0; j < titleList.getLength(); j++) {			//loop which will add title and text to article linked list
-						Node currentTitle = titleList.item(j);
-						Node currentContent = contentList.item(j);
-
-						if (currentTitle instanceof Element) {
-							Element titleElement = (Element) currentTitle;
-							Element contentElement = (Element) currentContent;
-							String title = titleElement.getTextContent();		//Getting text from title
-							String content = contentElement.getTextContent();	//Getting text from content
-							articles.add(new KlixArticle(title, content));		//Adding into linked list.
-						}
-
-					}
-
+					addArticle(articles, currentElement);
 				}
 			}
-
 		}
 		
 		/*
@@ -87,4 +71,27 @@ public class KlixReader {
 			}	
 			System.out.println(articles.get(choice).printArticle());					
 	}	
+	
+	/**
+	 * Method which adds title and text into Article linkedlist.
+	 * @param articles - linked list of KlixArticles
+	 * @param current - current element. From it we'll take title and content
+	 */
+	private static void addArticle(LinkedList<KlixArticle> articles, Element current){
+		NodeList titleList = ((Element) current).getElementsByTagName("title");		//Node list of titles
+		NodeList contentList = ((Element) current).getElementsByTagName("clanak");	//Node list of content
+		for (int j = 0; j < titleList.getLength(); j++) {			//loop which will add title and text to article linked list
+			Node currentTitle = titleList.item(j);
+			Node currentContent = contentList.item(j);
+
+			if (currentTitle instanceof Element) {
+				Element titleElement = (Element) currentTitle;
+				Element contentElement = (Element) currentContent;
+				String title = titleElement.getTextContent();		//Getting text from title
+				String content = contentElement.getTextContent();	//Getting text from content
+				articles.add(new KlixArticle(title, content));		//Adding into linked list.
+			}
+
+		}
+	}
 }
