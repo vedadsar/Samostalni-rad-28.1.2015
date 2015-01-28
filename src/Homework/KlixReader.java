@@ -54,12 +54,16 @@ public class KlixReader {
 					addArticle(articles, currentElement);
 				}
 			}
-		}
-		
-		/*
-		 * From now on all I done is making program user friendly.
-		 * Printed all titles and give user choice which title he wants to print on console.
-		 */
+		}		
+		startRSS(articles);				
+	}	
+	/**
+	 * This method starts reading and outputing to console articles from klix.
+	 * First it prints all titles and then gives user choice which article he wants
+	 * to read. Depending on choice, method prints only 1 article.
+	 * @param articles
+	 */
+	public static void startRSS(LinkedList<KlixArticle> articles){
 		System.out.println("List of titles at klix.ba: \n");
 		for(int i=0; i<articles.size();i++){
 			System.out.println(i +": " +articles.get(i).getTittle() );
@@ -69,8 +73,8 @@ public class KlixReader {
 				System.out.println("Choose which article you want to read: ");
 				choice = TextIO.getInt();			
 			}	
-			System.out.println(articles.get(choice).printArticle());					
-	}	
+			System.out.println(articles.get(choice).printArticle());	
+	}
 	
 	/**
 	 * Method which adds title and text into Article linkedlist.
